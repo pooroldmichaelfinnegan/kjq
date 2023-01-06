@@ -1,0 +1,664 @@
+{
+  "people": {
+    "family": [
+      ["family", "en familie"],
+      ["mother", "en mor"],
+      ["father", "en far"],
+      ["sister", "en søster"],
+      ["brother", "en bror"]
+    ], "love & friendship": [
+      ["man", "en mand"],
+      ["woman", "en kvinde"],
+      ["boy", "en dreng"],
+      ["girl", "en pige"],
+      ["friend", "en ven"]
+    ], "identity": [
+      ["name", "et fornavn"],
+      ["surname", "et efternavn"],
+      ["age", "en alder"],
+      ["person", "en person"]
+    ], "age & life events": [
+      ["baby", "en baby"],
+      ["child", "en barn"],
+      ["teenager", "en teenager"],
+      ["adult", "en voksen"]
+    ]
+  }, "describing people": {
+    "characteristics 1": [
+      ["active", "aktiv"],
+      ["friendly", "venlig"],
+      ["funny", "sjov"],
+      ["kind", "rar"],
+      ["smart", "klog"]
+    ], "characteristics 2": [
+      ["lazy", "doven"],
+      ["shy", "genert"],
+      ["rude", "flabet"],
+      ["passive", "passiv"],
+      ["greedy", "grådig"]
+    ], "physical characteristics": [
+      ["pretty", "køn"],
+      ["short", "lav"],
+      ["tall", "høj"],
+      ["cute", "nuttet"],
+      ["ugly", "grim"]
+    ], "physical states": [
+      ["hungry", "sulten"],
+      ["thirsty", "tørstig"],
+      ["tired", "træt"],
+      ["dizzy", "svimmel"]
+    ], "emotional states": [
+      ["happy", "glad"],
+      ["unhappy", "ulykkelig"],
+      ["calm", "rolig"],
+      ["nervous", "nervøs"]
+    ], "feelings": [
+      ["love", "en kærlighed"],
+      ["hope", "et håb"],
+      ["care", "en omsorg"],
+      ["fear", "en frygt"],
+      ["anger", "en vrede"]
+    ], "people's opinions": [
+      ["good", "god"],
+      ["bad", "dårlig"],
+      ["easy", "nem"],
+      ["difficult", "svær"],
+      ["important", "vigtig"],
+      ["unimportant", "ligegyldig"]
+    ]
+  }, "fashion": {
+    "clothes": [
+      ["dress", "en kjole"],
+      ["shirt", "en skjorte"],
+      ["skirt", "en nederdel"],
+      ["sweater", "en sweater"],
+      ["trousers", "busker"],
+      ["coat", "en frakke"]
+    ], "footwear": [
+      ["shoes", "sko"],
+      ["boots", "støvler"],
+      ["sandals", "sandaler"],
+      ["slippers", "sutsko"]
+    ], "accessories": [
+      ["bag", "en pose"],
+      ["hat", "en hat"],
+      ["belt", "en bælte"],
+      ["ring", "en ring"],
+      ["scarf", "et halstørklæde"]
+    ]
+  }, "body": {
+    "head & face": [
+      ["head", "et hoved"],
+      ["ear", "et øre"],
+      ["eye", "et øje"],
+      ["nose", "en næse"],
+      ["mouth", "en mund"]
+    ], "body parts": [
+      ["body", "en krop"],
+      ["neck", "en nakke"],
+      ["hand", "en hånd"],
+      ["foot", "en fod"],
+      ["finger", "en finger"]
+    ], "internal organs": [
+      ["organ", "et organ"],
+      ["heart", "et hjerte"],
+      ["lungs", "lunger"],
+      ["stomach", "en mave"],
+      ["blood", "et blod"]
+    ], "actions": [
+      ["to eat", "at spise"],
+      ["to drink", "at drikke"],
+      ["to sit", "at sidde"],
+      ["to jump", "at hoppe"],
+      ["to look", "at kigge"],
+      ["to sleep", "at sove"]
+    ]
+  }, "health": {
+    "health problems": [
+      ["disease", "en sygdom"],
+      ["cold", "en forkølelse"],
+      ["allergy", "en allergi"],
+      ["poisoning", "en forgiftning"]
+    ], "symptoms": [
+      ["pain", " en smerte"],
+      ["fever", "en feber"],
+      ["cough", "en hoste"],
+      ["to sneeze", "at nyse"],
+      ["rash", "et udslæt"]
+    ], "treatment": [
+      ["health", "et helbred"],
+      ["hospital", "et hospital"],
+      ["patient", "en patient"],
+      ["syringe", "en sprøjte"],
+      ["to treat", "at behandle"]
+    ], "pharmacy": [
+      ["pharmacy", "et apotek"],
+      ["pill", " en pille"],
+      ["capsule", "en kapsel"],
+      ["vitamin", "et vitamin"],
+      ["thermometer", "et termometer"]
+    ]
+  }, "house": {
+    "types of houses": [
+      ["house", "et hus"],
+      ["flat", "en lejlighed"],
+      ["villa", "en villa"],
+      ["castle", "et slot"]
+    ], "rooms": [
+      ["room", "et værelse"],
+      ["living room", "en dagligstue"],
+      ["bedroom", "et soveværelse"],
+      ["bathroom", "et badeværelse"],
+      ["toilet", "et toilet"],
+      ["kitchen", "et køkken"]
+    ], "furniture": [
+      ["bed", "en seng"],
+      ["sofa", "en sofa"],
+      ["chair", "en stol"],
+      ["table", "et bord"],
+      ["lamp", "en lampe"]
+    ], "home decor": [
+      ["carpet", "et gulvtæppe"],
+      ["curtains", "gardiner"],
+      ["vase", "en vase"],
+      ["candle", "et lys"]
+    ], "parts of the house": [
+      ["door", "en dør"],
+      ["window", "et vindue"],
+      ["wall", "en væg"],
+      ["floor", "et gulv"],
+      ["garden", "en have"]
+    ]
+  }, "shopping": {
+    "types of shops": [
+      ["shop", "en butik"],
+      ["market", "et marked"],
+      ["supermarket", "et supermaked"],
+      ["toy shop", "en legetøjsbutik"]
+    ], "appliance shop": [
+      ["fridge", "et køleskab"],
+      ["clock", "et ur"],
+      ["iron", "et strygejern"],
+      ["camera", "et kamera"],
+      ["washing machine", "en vaskemaskine"]
+    ], "kitchenware": [
+      ["cup", "en kop"],
+      ["glass", "et glas"],
+      ["spoon", "en ske"],
+      ["fork", "en gaffel"],
+      ["knife", "en kniv"]
+    ], "household products": [
+      ["box", "en kasse"],
+      ["brush", "en børste"],
+      ["sponge", "en svamp"],
+      ["broom", "en kost"]
+    ], "stationaery": [
+      ["pen", "en kuglepen"],
+      ["pencil", "en blyant"],
+      ["rubber", "et viskelæder"],
+      ["ruler", "en lineal"],
+      ["paper", "et papir"]
+    ], "bookshop": [
+      ["newspaper", "en avis"],
+      ["magazine", "et magasin"],
+      ["postcard", "et postkort"],
+      ["map", "et kort"]
+    ], "kids' shop": [
+      ["toy", "et legetøj"],
+      ["doll", "en dukke"],
+      ["kite", "en drage"],
+      ["balloon", "en ballon"],
+      ["teddy bear", "en bamse"],
+      ["nappy", "en ble"]
+    ], "cosmetics": [
+      ["cream", "en creme"],
+      ["lipstick", "en læbestift"],
+      ["perfume", "en parfume"],
+      ["powder", "et pudder"],
+      ["deodorant", "en deodorant"]
+    ], "bath products": [
+      ["soap", "en sæbe"],
+      ["toothpaste", "en tandpasta"],
+      ["toothbrush", "en tandbørste"],
+      ["toilet paper", "et toiletpapir"]
+    ]
+  }, "food & drink": {
+    "fruits": [
+      ["fruit", "en frugt"],
+      ["apple", "et æble"],
+      ["orange", "en appelsin"],
+      ["banana", "en banan"],
+      ["strawberry", "et jordbær"],
+      ["raspberry", "et hindbær"]
+    ], "vegetables": [
+      ["vegetable", "en grøntsag"],
+      ["potato", "en kartoffel"],
+      ["tomato", "en tomat"],
+      ["cucumber", "en agurk"],
+      ["carrot", "en gulerod"]
+    ], "meat": [
+      ["meat", "et kod"],
+      ["chicken", "en kylling"],
+      ["beef", "et oksekød"],
+      ["pork", "et svinekød"],
+      ["sausage", "en pølse"]
+    ], "fish & seafood": [
+      ["fish", "en fisk"],
+      ["salmon", "en laks"],
+      ["shrimp", "en reje"],
+      ["crab", "en krabbe"]
+    ], "dairy products": [
+      ["milk", "en mælk"],
+      ["butter", "et smør"],
+      ["cheese", "en ost"],
+      ["egg", "et æg"]
+    ], "breads": [
+      ["bread", "et brød"],
+      ["bun", "en bolle"],
+      ["toast", "et ristet brød"],
+      ["biscuit", "en småkage"]
+    ], "grains, nuts & seeds": [
+      ["wheat", "en hvede"],
+      ["rice", "en ris"],
+      ["maize", "en majs"],
+      ["nut", "en nød"]
+    ], "condiments": [
+      ["sugar", "et sukker"],
+      ["salt", "et salt"],
+      ["black pepper", "en sort peber"],
+      ["oil", "en olie"]
+    ], "sweets": [
+      ["sweet", "et bolsje"],
+      ["chocolate", "en chokolade"],
+      ["lollipop", "en slikkepind"],
+      ["honey", "en honning"]
+    ], "meals": [
+      ["food", "en mad"],
+      ["breakfast", "en morgenmad"],
+      ["lunch", "en frokost"],
+      ["dinner", "en aftensmad"]
+    ], "dishes": [
+      ["soup", "en suppe"],
+      ["salad", "en salat"],
+      ["sandwich", "en sandwich"],
+      ["cake", "en kage"],
+      ["jam", "et syltetøj"]
+    ], "describing food": [
+      ["sweet", "sødt"],
+      ["salty", "saltet"],
+      ["sour", "sur"],
+      ["bitter", "bitter"]
+    ], "non-alcoholic drinks": [
+      ["water", "vand"],
+      ["tea", "en te"],
+      ["coffee", "en kaffe"],
+      ["juice", "en juice"]
+    ]
+  }, "education": {
+    "school": [
+      ["school", "en skole"],
+      ["pupil", "en pupil"],
+      ["lesson", "en time"],
+      ["blackboard", "en tavle"],
+      ["classroom", "et klasseværelse"]
+    ]
+  }, "work": {
+    "jobs 1": [
+      ["teacher", "en lærer"],
+      ["doctor", " en læge"],
+      ["nurse", "en sygeplejerske"],
+      ["driver", "en chauffør"],
+      ["actress", "en skuespillerinde"],
+      ["cook", "en kok"]
+    ]
+  }, "culture": {
+    "literature": [
+      ["text", "en tekst"],
+      ["poem", "et digt"],
+      ["story", "en historie"],
+      ["fairy tale", "et eventyr"],
+      ["author", "ev forfatter"]
+    ], "books": [
+      ["book", "en bog"],
+      ["title", "en titel"],
+      ["cover", "et comslag"],
+      ["page", "en side"]
+    ], "music": [
+      ["music", "en musik"],
+      ["song", "en sang"],
+      ["sound", "en lyd"],
+      ["to sing", "at synge"]
+    ], "musical instruments": [
+      ["piano", "et klaver"],
+      ["guitar", "en guitar"],
+      ["drum", "en tromme"],
+      ["violin", "en violin"],
+      ["trumpet", "en trompet"]
+    ], "plastic arts": [
+      ["art", "en kunst"],
+      ["picture", "et billede"],
+      ["sculpture", "en skulptur"],
+      ["to draw", "at tegne"]
+    ]
+  }, "leisure time": {
+    "cinema": [
+      ["cinema", "en biograf"],
+      ["film", "en spillefilm"],
+      ["screen", "en skærm"],
+      ["comedy", "en komedie"]
+    ], "theartre": [
+      ["theartre", "et teater"],
+      ["play", "et teaterstykke"],
+      ["ballet", "en ballet"],
+      ["concert", "en koncert"],
+      ["ticket", "en billet"]
+    ], "travelling": [
+      ["tourist", "en turist"],
+      ["holiday", "en ferie"],
+      ["excursion", "en udflugt"],
+      ["to travel", "at rejse"]
+    ], "at the beach": [
+      ["beach", "en strand"],
+      ["sand", "et sand"],
+      ["tan", "en solbrændthed"],
+      ["rubber ring", "en badering"]
+    ], "games": [
+      ["game", "et spil"],
+      ["chess", "en skak"],
+      ["jigsaw", "et puslespil"],
+      ["dominoes", "en domino"],
+      ["to play", "at lege"]
+    ], "playground": [
+      ["sandpit", "en sandkasse"],
+      ["swing", "en gynge"],
+      ["seesaw", "en vippe"],
+      ["slide", "en rutsjebane"],
+      ["snowman", "en snemand"]
+    ]
+  }, "sport": {
+    "summer sports": [
+      ["football", "en fodbold"],
+      ["volleyball", "en volleyball"],
+      ["basketball", "en basketball"],
+      ["tennis", "en tennis"],
+      ["badminton", "en badminton"]
+    ], "gym": [
+      ["gym", "en gymnastiksal"],
+      ["exercise", "en motion"],
+      ["fitness", "en kondition"],
+      ["to train", "at træne"]
+    ], "about sports": [
+      ["sport", "en sport"],
+      ["team", "et hold"],
+      ["champion", "en mester"],
+      ["medal", "en medalje"],
+      ["victory", "en sejr"]
+    ]
+  }, "city": {
+    "restaurant & bar": [
+      ["restaurant", "en restaurant"],
+      ["pub", "en bar"],
+      ["menu", "en menu"],
+      ["bill", "en regning"],
+      ["to order", "at bestille"]
+    ], "tourist attractions": [
+      ["museum", "et museum"],
+      ["park", "en park"],
+      ["bridge", "en bro"],
+      ["monument", "et monument"]
+    ], "streets": [
+      ["street", "en gade"],
+      ["way", "en vej"],
+      ["parking", "en parkeringsplads"],
+      ["place", "et sted"]
+    ], "regions": [
+      ["country", "et land"],
+      ["city", "en by"],
+      ["village", "en landsby"],
+      ["suburb", "en forstad"]
+    ]
+  }, "transport": {
+    "road transport": [
+      ["car", "en bil"],
+      ["bus", "en bus"],
+      ["bicycle", "en cykel"],
+      ["to drive", "at køre"]
+    ], "rail transport": [
+      ["train", "et tog"],
+      ["platform", "en perron"],
+      ["wagon", "en godsvogn"],
+      ["underground", "en metro"]
+    ], "air transport": [
+      ["plane", "en flyvemaskine"],
+      ["airport", "en lufthavn"],
+      ["helicopter", "en helikopter"],
+      ["to fly", "at flyve"]
+    ], "water transport": [
+      ["ship", "et skib"],
+      ["boat", "en båd"],
+      ["port", "en havn"],
+      ["anchor", "et anker"],
+      ["to sail", "at sejle"]
+    ]
+  }, "communications": {
+    "tv & radio": [
+      ["television", "et tv"],
+      ["radio", "en radio"],
+      ["news", "en nyhed"],
+      ["show", "et tv-program"]
+    ], "computers": [
+      ["computer", "en computer"],
+      ["monitor", "en monitor"],
+      ["mouse", "en mus"],
+      ["keyboard", "et tasatur"],
+      ["processor", "en processor"]
+    ], "internet": [
+      ["internet", "et internet"],
+      ["website", "en hjemmeside"],
+      ["user", "en bruger"],
+      ["password", "et kodeord"]
+    ], "phones": [
+      ["phone", "en telefon"],
+      ["message", "en besked"],
+      ["to call", "at ringe"],
+      ["to charge", "at oplade"]
+    ]
+  }, "security": {
+    "police": [
+      ["police", "et politi"],
+      ["police car", "en politibil"],
+      ["detective", "en detektiv"],
+      ["handcuffs", "håndjern"],
+      ["to arrest", "at arrestere"]
+    ]
+  }, "animals": {
+    "domestic animals": [
+      ["cat", "en kat"],
+      ["dog", "en hund"],
+      ["cow", "en ko"],
+      ["horse", "en hest"],
+      ["pig", "en gris"]
+    ], "domestic birds": [
+      ["hen", "en høne"],
+      ["cock", "en hane"],
+      ["duck", "en and"],
+      ["goose", "en gås"]
+    ], "wild animals": [
+      ["fox", "en ræv"],
+      ["wolf", "en ulv"],
+      ["bear", "en bjørn"],
+      ["lion", "en løve"],
+      ["elephant", "en elefant"]
+    ], "wild birds": [
+      ["owl", "en ugle"],
+      ["swan", "en svane"],
+      ["crow", "en krage"],
+      ["eagle", "en øm"]
+    ], "amphibians & reptiles": [
+      ["frog", "en frø"],
+      ["snake", "en slange"],
+      ["turtle", "en skildpadde"],
+      ["crocodile", "en krokodille"]
+    ], "insects & arachnids": [
+      ["fly", "en flue"],
+      ["ant", "en myre"],
+      ["bee", "en bi"],
+      ["spider", "en edderkop"]
+    ], "baby animals": [
+      ["kitten", "killing"],
+      ["puppy", "en hvalp"],
+      ["chuck", "en kylling"],
+      ["piglet", "en pattegris"]
+    ]
+  }, "plants": {
+    "trees": [
+      ["tree", "et træ"],
+      ["leaf", "et blad"],
+      ["oak", "en eg"],
+      ["pine", "en fyr"],
+      ["maple", "en ahorn"]
+    ], "fruit trees": [
+      ["apple tree", "et æbletræ"],
+      ["lemon tree", "et citrontræ"],
+      ["peach tree", "et ferskentræ"],
+      ["olive tree", "et oliventræ"]
+    ], "floers": [
+      ["rose", "en rose"],
+      ["tulip", "en tulipan"],
+      ["daffoldil", "en påskelilje"],
+      ["daisy", "en bellis"],
+      ["flower", "en blomst"]
+    ], "agriculture": [
+      ["farm", "en bondegård"],
+      ["rake", "en rive"],
+      ["shovel", "en skovl"],
+      ["tractor", "en traktor"],
+      ["gardener", "en gartner"],
+      ["to plant", "at plante"],
+      ["to water", "at vande"]
+    ]
+  }, "environment": {
+    "weather": [
+      ["hot", "hed"],
+      ["warm", "varm"],
+      ["cool", "kølig"],
+      ["cold", "kold"],
+      ["air", "en luft"]
+    ], "natural phenomena": [
+      ["fog", "en tåge"],
+      ["storm", "en storm"],
+      ["thunder", "en torden"],
+      ["lightning", "et lyn"],
+      ["rainbow", "en regnbue"]
+    ], "landscape": [
+        ["hill", "en høj"],
+        ["forest", "en knov"],
+        ["desert", "en ørken"],
+        ["mountain", "et bjerg"]
+    ], "water bodies": [
+      ["ocean", "et ocean"],
+      ["sea", "et hav"],
+      ["river", "en flod"],
+      ["lake", "en sø"]
+    ]
+  }, "systems": {
+    "cardinal numbers": [
+      ["zero", "nul"],
+      ["one", "en"],
+      ["two", "to"],
+      ["three", "tre"],
+      ["four", "fire"],
+      ["five", "fem"],
+      ["six", "seks"],
+      ["seven", "syv"],
+      ["eight", "otte"],
+      ["nine", "ni"],
+      ["ten", "ti"]
+    ], "colours": [
+      ["black", "sort"],
+      ["white", "hvid"],
+      ["red", "rød"],
+      ["yellow", "gul"],
+      ["blue", "blå"]
+    ], "calender": [
+      ["year", "et år"],
+      ["winter", "en vinter"],
+      ["spring", "et forår"],
+      ["summer", "en sommer"],
+      ["autumn", "et efterår"],
+      ["calender", "en kalender"]
+    ], "time": [
+      ["time", "en tid"],
+      ["day", "en dag"],
+      ["hour", "en time"],
+      ["minute", "et minut"],
+      ["second", "et sekund"]
+    ], "sizes & shapes": [
+      ["big", "stor"],
+      ["small", "lille"],
+      ["circle", "en cirkel"],
+      ["square", "en kvadrat"]
+    ]
+  }, "verbs": {
+    "actions 1": [
+      ["to come", "at komme"],
+      ["to go", "at gå"],
+      ["to open", "at åbne"],
+      ["to close", "at lukke"],
+      ["to make", "at lave"]
+    ], "communication": [
+      ["to ask", "at spørge"],
+      ["to say", "at sige"],
+      ["to repeat", "at gentage"],
+      ["to talk", "at tale"],
+      ["to shout", "at råbe"]
+    ]
+  }, "adjectives": {
+    "describing objects": [
+      ["old", "gammel"],
+      ["new", "ny"],
+      ["empty", "tom"],
+      ["full", "fuld"]
+    ]
+  }, "adverbs": {
+    "adverbs of time & frequency": [
+      ["now", "nu"],
+      ["today", "i dag"],
+      ["tomorrow", "i morgen"],
+      ["yesterday", "i går"]
+    ], "internogative & linking words": [
+      ["when", "når"],
+      ["where", "hvor"],
+      ["why", "hvorfor"],
+      ["what", "hvad"],
+      ["how", "hvordan"]
+    ]
+  }, "other parts of speech": {
+    "pronouns": [
+      ["i", "jeg"],
+      ["you", "du"],
+      ["she", "hun"],
+      ["he", "han"],
+      ["it", "det"],
+      ["we", "vi"],
+      ["you", "i"],
+      ["they", "de"]
+    ], "prepositions": [
+      ["on", "på"],
+      ["under", "under"],
+      ["in", "i"],
+      ["near", "nær"],
+      ["between", "mellem"]
+    ], "conjuctions": [
+      ["and", "og"],
+      ["or", "eller"],
+      ["if", "hvis"],
+      ["but", "men"]
+    ], "punctuation": [
+      ["dot", "et punkt"],
+      ["comma", "et komma"],
+      ["dash", "en tankestreg"],
+      ["brackets", "en parentes"]
+    ]
+  }
+}

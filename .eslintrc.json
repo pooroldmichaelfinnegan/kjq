@@ -1,0 +1,6 @@
+{
+  "extends": "next/core-web-vitals",
+  "eslint.rules.customizations": [
+    { "rule": "*", "severity": "warn" }
+  ]
+}

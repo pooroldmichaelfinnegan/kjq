@@ -1,0 +1,13 @@
+[
+    ["days of the week", "ugens dage"],
+    ["monday", "mandag"],
+    ["tuesday", "tirsdag"],
+    ["wednesday", "onsdag"],
+    ["thursday", "torsdag"],
+    ["friday", "fredag"],
+    ["saturday", "lørdag"],
+    ["sunday", "søndag"],
+    ["day", "dag"],
+    ["week", "uge"],
+    ["weekend", "weekend"]
+]

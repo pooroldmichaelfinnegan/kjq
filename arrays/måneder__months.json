@@ -1,0 +1,18 @@
+[
+    ["januar", "january"],
+    ["februar", "february"],
+    ["marts", "march"],
+    ["april", "april"],
+    ["maj", "may"],
+    ["juni", "june"],
+    ["juli", "july"],
+    ["august", "august"],
+    ["september", "september"],
+    ["oktober", "october"],
+    ["november", "november"],
+    ["december", "december"],
+    ["måned", "month"],
+    ["år", "year"],
+    ["månedlig", "monthly"],
+    ["årlig", "yearly"]
+]
