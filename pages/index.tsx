@@ -1,19 +1,24 @@
 import React, { useState, useEffect, useContext, createContext } from "react"
 
-import ords from "../arrays/ords221229-220105.json"
+import ords from "../arrays/ords_gt_221229_230105.json"
 
+const simple = [
+  [ "værdi", "value", "noun: value, merit, price, worth" ],
+  [ "støtter", "supports", "verb: support, sustain, rest", "noun: support, rest, stay, encouragement, pillar" ],
+]
 
 export default function Home() {
-  const [ord, setOrd] = useState("ved")
+  const [ord, setOrd] = useState(['', '_______________'])
   const [answers, setAnswers] = useState([])
   const [inputField, setInputField] = useState("")
 
-  function random(array) {
+  function random(array: Array<any>) {
     return array[Math.floor(Math.random() * array.length)]
   }
 
   const newOrd = () => {
     const rand = random(ords)
+    console.log(rand)
     setOrd(rand)
   }
 
@@ -24,21 +29,17 @@ export default function Home() {
 
   const onClack = () => {
     newOrd()
-    setInputField('')
+    // setInputField('')
   }
 
   return (
     <>
       <div className="bg-black text-white flex flex-col justify-center content-center">
         <div className="flex flex-col justify-center content-center min-w-full h-full text-center">
-          <h1 
-            className="text-8xl mt-[10px] overflow-hidden	"
-            onClick={onClack}
-          >{ord[0]}</h1>
-          <h1 className="text-6xl text-center px-[10px] text-black text-clip hover:text-white">{ord[0]}</h1>
-          {/* <h1 className="text-8xl mt-[10px]">{engDan ? "true" : "false"}</h1> */}
-
-
+          <Card
+            ord={ord} 
+            onClack={onClack}
+          />
           <Input
             ord={ord}
             inputField={inputField}
@@ -46,20 +47,27 @@ export default function Home() {
             onClack={onClack}
             onEnter={onEnter}
           />
-
-          <div className="w-full text-base">
-            <DisplayAnswers
-              answers={answers}
-            />
-          </div>
         </div>
       </div>
     </>
 )}
 
 
+function Card({ ord, onClack }) {
+  console.log({ ord })
+
+  return <div className={`flex flex-col height-[100%]`} onClick={onClack}>
+    <div className={`basis-1/2 text-8xl`}>{ord[0]}</div>
+    <div className={`text-black hover:text-white`}>
+      <div className={`basis-1/4`}>{ord[1]}</div>
+      {ord.length > 1 && [ ...ord ].slice(2).map(str => <div className={`basis-1/4`}>{str}</div>)}
+    </div>
+  </div>
+}
+
+
 function Input({ ord, inputField, setInputField, onEnter }) {
-  const handleAnswerChange = (event) => {
+  const handleInputChange = (event) => {
     switch( event.key ) {
       case "Enter":
         onEnter()
@@ -68,7 +76,7 @@ function Input({ ord, inputField, setInputField, onEnter }) {
   return <input
     className="bg-black text-center my-4 w-full"
     type="text"
-    onKeyDown={handleAnswerChange}
+    onKeyDown={handleInputChange}
     value={inputField}
     onChange={(e) => {
       setInputField(e.target.value)
