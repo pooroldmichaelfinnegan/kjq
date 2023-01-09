@@ -7,6 +7,7 @@ const simple = [
   [ "støtter", "supports", "verb: support, sustain, rest", "noun: support, rest, stay, encouragement, pillar" ],
 ]
 
+
 export default function Home() {
   const [ord, setOrd] = useState(['', '_______________'])
   const [answers, setAnswers] = useState([])
@@ -67,7 +68,7 @@ function Card({ ord, onClack }) {
 
 
 function Input({ ord, inputField, setInputField, onEnter }) {
-  const handleInputChange = (event) => {
+  const handleInputChange = event => {
     switch( event.key ) {
       case "Enter":
         onEnter()
