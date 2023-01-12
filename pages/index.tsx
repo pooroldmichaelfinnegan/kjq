@@ -1,15 +1,19 @@
 import React, { useState, useEffect, useContext, createContext } from "react"
 
+
+import { getGT } from "../google_translate_stuff/gt"
 import ords from "../arrays/ords_gt_221229_230105.json"
 
 const simple = [
-  [ "værdi", "value", "noun: value, merit, price, worth" ],
-  [ "støtter", "supports", "verb: support, sustain, rest", "noun: support, rest, stay, encouragement, pillar" ],
+  [ "værdi" ],
+  [ "støtter" ],
 ]
 
+const ctx_solution = createContext(0)
 
 export default function Home() {
-  const [ord, setOrd] = useState(['', '_______________'])
+  const [words, setWords] = useState([])
+  const [ord, setOrd] = useState([''])
   const [answers, setAnswers] = useState([])
   const [inputField, setInputField] = useState("")
 
@@ -34,7 +38,7 @@ export default function Home() {
   }
 
   return (
-    <>
+    <ctx_solution.Provider value={0}>
       <div className="bg-black text-white flex flex-col justify-center content-center">
         <div className="flex flex-col justify-center content-center min-w-full h-full text-center">
           <Card
@@ -50,7 +54,7 @@ export default function Home() {
           />
         </div>
       </div>
-    </>
+    </ctx_solution.Provider>
 )}
 
 

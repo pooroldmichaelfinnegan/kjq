@@ -1,6 +1,8 @@
 import { useRouter } from 'next/router'
 import { useState, useEffect } from 'react'
-import axios from 'axios'
+import axios, { AxiosResponse } from 'axios'
+
+import { GTget } from "../google_translate_stuff/gt"
 
 export default function DynamicRoute() {
   const router = useRouter()
@@ -20,20 +22,3 @@ export default function DynamicRoute() {
 
   return <div>{ json }</div>
 }
-
-
-const GTget = async (ord: string | string[]): Promise<T> => {
-  const URL = `https://translate.googleapis.com/translate_a/single`
-            + `?client=gtx`
-            + `&dt=t`
-            + `&dt=bd`
-            + `&dj=1`
-            + `&sl=da`
-            + `&tl=en`
-            + `&q=${ord}`
-
-  const orddata = await axios.get(URL)
-  
-  return orddata
-}
-  
