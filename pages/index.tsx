@@ -1,69 +1,117 @@
-import React, { useState, useEffect, useContext, createContext } from "react"
+import React, { useState, useEffect, useRef } from "react"
+import fs from 'fs'
 
-import { randomElement, setRandomElement } from "../tools"
+import { randomElement, setRandomElement, date_YYMMDD_hhmmss } from "../tools"
 import { getGT } from "../google_translate_stuff/gt"
-import wordList from "../../google_drive_pomf/ords.json"
+import wordList from "../../google_drive_pomf/str_ords.json"
 
-const sample = { "230113": { "værdi": "2",
-                             "støtter": "1" }
-               }
 
-interface Date extends Object { ord: Object<string> }
+const sampleWords = ["220101 3 A", "220109 4 B", "220102 7 C", "220101 10 D"]
+const today = date_YYMMDD_hhmmss()
 
-const calcWordArrays = (obj: Object<Date>) => {
-  const arr: string[][] = [[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],]
+const ARRAY = wordList
 
-  for (const date in obj) {
-    for (const ord in obj[date]) {
-      arr[obj[date][ord]].push(ord)
-    }
-  }
 
-  console.log(arr)
+enum zeroNine {zero, one, two, three, four}
+enum onOff { off, on }
+type dcw = [string, number, string]
+
+const str2dcw = (str: string): dcw => {
+  const date: string = str.slice(0,6)
+  const count: number = parseInt(str.slice(7,8))
+  const word: string = str.slice(9)
+
+  return [date, count, word]
 }
 
 
-export default function Home() {
-  const [words, setWords] = useState<string[]>([])
-  const [currentOrd, setCurrentOrd] = useState<[number, string]>([69, "sixtyNine"])
-  const [answers, setAnswers] = useState<string[]>([])
 
-  useEffect(() => {
-    const translate = 
-  }, currentOrd)
-
-  const handleAdd = (ord) => {
-
+const getDates = (obj: (string|number)[][]): [string,boolean][] => {
+  const check: string[] = []
+  const arr: [string,boolean][] = []
+  
+  for (const str of obj) {
+    const date = str.slice(6)
+    if (check.indexOf(date) === -1)
+      check.push(date)
+      arr.push([date, 0])
   }
-  const handleSub = () => {}
+  return arr
+}
+const allDates = getDates(ARRAY)
+console.log(" >>> allDate", allDates)
+
+
+const calcWordArrays = (obj: string[]) => {
+  const arr: [string, string][] | [][] = [[],[],[],[],[]]
+
+  for (const str in obj) {
+    const count: string = dcw
+    if (0 > count || count > 4)
+      continue
+    arr[count].push()
+  }
+
+  console.log(arr)
+  return arr
+}
+
+// const words = calcWordArrays(sample)
+
+
+export default function Home() {
+  const [currentOrd, setCurrentOrd] = useState('')
+  const rerenders: {current: number} = useRef(0)
+
+  // useEffect(() => {
+  //   if (currentOrd === undefined || currentOrd === '') {
+  //     setRandomElement(setCurrentOrd, ARRAY)
+  //   }
+  // })
+
+  // useEffect(() => {
+  //   rerenders.current += 1
+  // })
+
+  const handleSub = () => {
+    rerenders.current += 1
+    // setRandomElement(setCurrentOrd, ARRAY)
+    setCurrentOrd(ARRAY[rerenders.current])
+  }
 
   return (
     <div className="bg-black text-white flex flex-col justify-center content-center">
-      <button 
-          className={``}
-          onClick={() => handleAdd(currentOrd)}
-        >+</button>
+      <div>{rerenders.current}</div>
+      {/* <Dates /> */}
       <button
           className={``}
           onClick={() => handleSub()}
         >-</button>
       <div className="flex flex-col justify-center content-center min-w-full h-full text-center">
         <Card
-          ord={ord}
-        />
+            currentOrd={currentOrd}
+          />
       </div>
     </div>
 )}
 
 
-function Card({ ord }) {
-  return <div className={`flex flex-col height-[100%]`}>
-
+function Card({ currentOrd }) {
+  return <div className={`flex flex-col height-[100%] text-8xl`}>
+    {currentOrd.slice(9)}
   </div>
 }
 
 
-interface Answer {
-  ord: string
-  translation: string
-}
+// function Dates() {
+//   return <div className={`flex flex-col absolute`}>
+//     {allDates.map((day) => {
+//       return <button
+//           id={`${day}`}
+//           className={``}
+//         >
+//         {day}
+//       </button>
+//     })}
+//   </div>
+// }
