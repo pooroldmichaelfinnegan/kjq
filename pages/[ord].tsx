@@ -2,7 +2,7 @@ import { useRouter } from 'next/router'
 import { useState, useEffect } from 'react'
 import axios, { AxiosResponse } from 'axios'
 
-import { GTget } from "../google_translate_stuff/gt"
+import { getGT } from "../google_translate_stuff/gt"
 
 export default function DynamicRoute() {
   const router = useRouter()
@@ -12,7 +12,7 @@ export default function DynamicRoute() {
   useEffect(() => {
     if (ord === undefined) return
 
-    GTget(ord)
+    getGT(ord)
       .then(response => response.data) 
       .then(data => JSON.stringify(data))
       .then(json => setJson(json))
