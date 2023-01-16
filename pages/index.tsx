@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react"
 import axios from 'axios'
 
 import { randomElement, setRandomElement, date_YYMMDD_hhmmss } from "../tools"
-import { getGT, parseData } from "../google_translate_stuff/gt"
+import { getGT, parseData, T } from "../google_translate_stuff/gt"
 import wordList from "../../google_drive_pomf/str_ords.json"
 
 
@@ -68,8 +68,10 @@ export default function Home() {
   const [dateToggles, setDateToggles] = useState(getDates(ARRAY))
   const [DCWs, setDCWs] = useState(ARRAY)
   const [wordArray, setWordArray] = useState(calcWordArray(ARRAY, dateToggles))
-  const [translation, setTranslation] = useState()
+  const [translation, setTranslation] = useState<T>()
   const rerenders: {current: number} = useRef(0)
+
+  const [manualRender, setManualRender] = useState(0)
 
   // useEffect(() => {
   //   if (currentOrd === undefined || currentOrd === '') {
@@ -90,7 +92,7 @@ export default function Home() {
       .then(response => response.data) 
       // .then(log => console.log(log))
       .then(data => parseData(data))
-      // .then(str => setTranslation(str))
+      .then(t => setTranslation(t))
 
   }, [currentOrd])
 
@@ -140,17 +142,23 @@ export default function Home() {
   }
 
   return (
-    <div className={`bg-black text-slate-300 flex flex-col justify-center content-center`}>
+    <div className={`bg-black text-slate-300 flex flex-col`}>
       <div>{rerenders.current}</div>
+      <Dates
+            dateToggles={dateToggles}
+            handleDateToggle={handleDateToggle}
+            manualRender={manualRender}
+            setManualRender={setManualRender}
+          />
       <div className="flex flex-col justify-center content-center min-w-full h-full text-center">
         <Card
           currentOrd={currentOrd}
           handleNewOrd={handleNewOrd}
         />
-        <Translation translation={translation} />
-        <Dates
-            dateToggles={dateToggles}
-            handleDateToggle={handleDateToggle}
+        <Translation
+            translation={translation}
+            manualRender={manualRender}
+            setManualRender={setManualRender}
           />
       </div>
     </div>
@@ -162,33 +170,36 @@ function Card({ currentOrd, handleNewOrd }) {
   const [_, __, word]: dcw = str2dcw(currentOrd)
 
   return <div
-      className={`flex flex-col p-[20px] border-2 text-8xl`}
+      className={`flex flex-col p-[20px] text-6xl`}
       onClick={() => handleNewOrd()}
-    >
-    {word}
+    >{word}
   </div>
 }
 
 
 function Translation({ translation }) {
+  if (translation === undefined || !translation.hasOwnProperty('source'))
+    translation = { source: 'egg' }
+
   return <div
-      className={``}
-    >{translation}</div>
+      className={`border-2`}
+    >{translation.translation}</div>
 }
 
 
-function Dates({ dateToggles, handleDateToggle }) {
-  const [rerender, setRerender] = useState(0)
-  return <div className={`absolute flex flex-col justify-center pt-[1px]`}>
+function Dates({ dateToggles, handleDateToggle, manualRender, setManualRender }) {
+  return <div className={`absolute flex flex-col top-9`}>
     {Object.keys(dateToggles).map((day: string) => {
-      const dayColor: string = dateToggles[day] ? 'text-slate-300' : 'text-slate-500'
+      const dayColor: string = dateToggles[day] ? 'text-slate-500' : 'text-black'
 
       return <button
           key={`${day}`}
           id={`${day}`}
-          className={`${dayColor} py-[5px]`}
-          onClick={() => { handleDateToggle(day)
-                           setRerender(rerender + 1) }}
+          className={`relative ${dayColor} hover:text-slate-300 py-[0px]`}
+          onClick={() => {
+            handleDateToggle(day)
+            setManualRender(manualRender + 1)
+          }}
         >{day}</button>
     })}
   </div>
