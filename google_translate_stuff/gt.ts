@@ -1,6 +1,6 @@
 import axios, { AxiosResponse } from 'axios'
 
-export { getGT, parseData, type T }
+export { getGT, parseData, type T, type LCEntry }
 
 
 const getGT = async (ord: string | string[]): Promise<AxiosResponse<any, any>> => {
@@ -34,7 +34,7 @@ interface LCs {
   preposition: LCEntry[] | []
 }
 interface LCEntry {
-  word: string
+  word: string[]
   reverse_translation: string[] | []
   score: number
 }
@@ -55,8 +55,11 @@ const parseData = (data: Data): T => {
   if (data.hasOwnProperty('dict') && data.dict.length) {
     for (const lc of data.dict) {
       for (const entry of lc.entry) {
-        
-        t.lexcats[lc.pos] = entry as LCEntry
+        // let currentLC = []
+        let currentLC = t.lexcats[lc.pos]
+        if (currentLC === undefined) currentLC = []
+        t.lexcats[lc.pos] = [ ...currentLC, entry as LCEntry ]
+        // t.lexcats[lc.pos].push(entry as LCEntry)
       }
     }
   }

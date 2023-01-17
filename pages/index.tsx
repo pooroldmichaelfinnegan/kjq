@@ -2,8 +2,9 @@ import React, { useState, useEffect, useRef } from "react"
 import axios from 'axios'
 
 import { randomElement, setRandomElement, date_YYMMDD_hhmmss } from "../tools"
-import { getGT, parseData, T } from "../google_translate_stuff/gt"
+import { getGT, parseData, T, LCEntry } from "../google_translate_stuff/gt"
 import wordList from "../../google_drive_pomf/str_ords.json"
+import { disconnect } from "process"
 
 
 const sampleWords = ["220101 3 A", "220109 4 B", "220102 7 C", "220101 10 D"]
@@ -144,22 +145,16 @@ export default function Home() {
   return (
     <div className={`bg-black text-slate-300 flex flex-col`}>
       <div>{rerenders.current}</div>
-      <Dates
-            dateToggles={dateToggles}
-            handleDateToggle={handleDateToggle}
-            manualRender={manualRender}
-            setManualRender={setManualRender}
-          />
+      <Dates dateToggles={dateToggles}
+             handleDateToggle={handleDateToggle}
+             manualRender={manualRender}
+             setManualRender={setManualRender} />
       <div className="flex flex-col justify-center content-center min-w-full h-full text-center">
-        <Card
-          currentOrd={currentOrd}
-          handleNewOrd={handleNewOrd}
-        />
-        <Translation
-            translation={translation}
-            manualRender={manualRender}
-            setManualRender={setManualRender}
-          />
+        <Card currentOrd={currentOrd}
+              handleNewOrd={handleNewOrd} />
+        <Translation translation={translation}
+                     manualRender={manualRender}
+                     setManualRender={setManualRender} />
       </div>
     </div>
 )}
@@ -170,20 +165,57 @@ function Card({ currentOrd, handleNewOrd }) {
   const [_, __, word]: dcw = str2dcw(currentOrd)
 
   return <div
-      className={`flex flex-col p-[20px] text-6xl`}
+      className={`flex flex-col p-[200px] text-8xl`}
       onClick={() => handleNewOrd()}
     >{word}
   </div>
 }
 
 
-function Translation({ translation }) {
-  if (translation === undefined || !translation.hasOwnProperty('source'))
+function Translation({ translation, manualRender, setManualRender }) {
+  if (translation === undefined || !translation.hasOwnProperty('source')) {
     translation = { source: 'egg' }
+  }
+  
+  let a: JSX.Element
+  // let a: any
 
-  return <div
-      className={`border-2`}
-    >{translation.translation}</div>
+  if (translation.hasOwnProperty('lexcats')) {
+    // setManualRender(manualRender + 1)
+    // a = <div>working but not</div> 
+    a = Object.keys(translation.lexcats).map(lc => {
+      // console.log('lc > ', translation.lexcats[lc])
+      return <div className={`flex flex-row`}>
+        {/* <div className={`w-1/6 border-0`}></div> */}
+        <div className={`flex flex-row justify-center w-5/6 px-[20px] border-0`}>
+          <div className={`w-1/5 text-left border-0`}>{lc}</div>
+          <div className={`flex flex-col justify-center w-3/4 border-0`}>
+            {translation.lexcats[lc].map((en_word: LCEntry) => {
+              let color = en_word.score ? 'text-slate-200 ': 'text-slate-400'
+              return <div className={`w-7/8 flex flex-row justify-left border-0 py-[3px] ${color}`}>
+                <div className={`w-2/5 px-[5px] text-left border-0`}>{en_word.word}</div>
+                {/* <div className={`w-[100px] p-[5px] text-left`}>{en_word.score}</div> */}
+                {en_word.reverse_translation.map((rt_word: string) => {
+                  color = en_word.score ? 'text-slate-300 ': 'text-slate-500'
+                  return <div className={`px-[5px] flex-nowrap text-left border-0 overflow-visible ${color}`}>{rt_word}</div>
+                })}
+              </div>
+            })}
+          </div>
+        </div>
+      </div>
+    })
+  }
+
+  if (a === undefined) {
+    a = <div>a is undefined</div>
+  }
+
+
+  return <div className={`flex flex-col border-0`}>
+    <div className={`text-4xl py-[20px]`}>{translation.translation}</div>
+    {a}
+  </div>
 }
 
 
