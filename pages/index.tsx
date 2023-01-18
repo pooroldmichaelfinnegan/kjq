@@ -1,76 +1,58 @@
-import React, { useState, useEffect, useRef } from "react"
-import axios from 'axios'
+import { useEffect, useRef, useState } from "react"
 
-import { randomElement, setRandomElement, date_YYMMDD_hhmmss } from "../tools"
-import { getGT, parseData, T, LCEntry } from "../google_translate_stuff/gt"
-import wordList from "../../google_drive_pomf/str_ords.json"
-import { disconnect } from "process"
+import { getGT, LCEntry, parseData } from "../google_translate_stuff/gt"
+import { randomElement } from "../tools"
+
+// import wordList from "../../google_drive_pomf/str_ords.json"
+import wordList from "../../google_drive_pomf/date_where_ord.json"
 
 
-const sampleWords = ["220101 3 A", "220109 4 B", "220102 7 C", "220101 10 D"]
-const today = date_YYMMDD_hhmmss()
+interface DWO {
+  date: string
+  where: number
+  ord: string
+}
 
-const ARRAY = wordList
-// const ARRAY = wordList.slice(-20)
+const ARRAY: DWO[] = wordList.slice(-20)
 const BACKUP = ARRAY
+const DEFAULT_DWO: DWO = { date: "221228", where: 1, ord: "ved" } as DWO
 
 
-type dcw = [string, number, string]
-const str2dcw = (str: string): dcw => {
-  const date: string = str.slice(0,6)
-  const count: number = parseInt(str.slice(7,8))
-  const word: string = str.slice(9)
+const getDates = (array: DWO[]): Record<string, Boolean> => {
+  const datesToggle: Record<string, Boolean> = {}
+  let dwo: DWO
 
-  return [date, count, word]
-}
-
-const dcw2str = (dcw: dcw): string => {
-  const [date, count, word] = dcw
-
-  return `${date} ${count} ${word}`
-}
-
-
-const getDates = (obj: string[]): {} => {
-  const arr = {}
-  
-  for (const str of obj) {
-    const [date, _, __]: dcw = str2dcw(str)
-  
-    arr[date] = 0
+  for (dwo of array) {
+    datesToggle[dwo.date] = false
   }
-  return arr
+  return datesToggle
 }
-// const allDates = getDates(ARRAY)
 
 
+const calcWordArray = (array: DWO[], date_toggles: Record<string, Boolean>): DWO[] => {
+  let dwo_pool: DWO[] = []
+  let dwo: DWO
 
-const calcWordArray = (obj: string[], dates) => {
-  let arr: string[] = []
+  for (dwo of array) {
+    if (date_toggles[dwo.date] == false) continue
+    if (0 > dwo.where) continue
+    if (dwo.where > 4) continue
 
-  for (const str of obj) {
-    const [date, count, word]: dcw = str2dcw(str)
-
-    // console.log(' >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> ')
-    // console.log(' >>> calc dates > ', dates)
-    // console.log(' >>> calc dates[date] > ', dates[date])
-    // console.log(' >>> calc string > ', str)
-
-    if (dates[date] == 0) continue
-    if (0 > count || count > 4) continue
-    arr = [ ...arr, str ]
+    for (let i = 0; i < dwo.where; i++) {
+      dwo_pool = [...dwo_pool, dwo]
+    }
   }
-  return arr
+  return dwo_pool
 }
 
 
 export default function Home() {
-  const [currentOrd, setCurrentOrd] = useState('230112 4 default')
-  const [dateToggles, setDateToggles] = useState(getDates(ARRAY))
-  const [DCWs, setDCWs] = useState(ARRAY)
-  const [wordArray, setWordArray] = useState(calcWordArray(ARRAY, dateToggles))
-  const [translation, setTranslation] = useState<T>()
-  const rerenders: {current: number} = useRef(0)
+  const [Array, setArray] = useState<DWO[]>(ARRAY)
+  const [currentOrd, setCurrentOrd] = useState<DWO>(DEFAULT_DWO)
+  const [dateToggles, setDateToggles] = useState<Record<string, Boolean>>(getDates(Array))
+  const [wordArray, setWordArray] = useState(calcWordArray(Array, dateToggles))
+  const [translation, setTranslation] = useState()
+  const rerenders: { current: number } = useRef(0)
 
   const [manualRender, setManualRender] = useState(0)
 
@@ -87,10 +69,8 @@ export default function Home() {
   useEffect(() => {
     if (currentOrd === undefined) return
 
-    const [_, __, word] = str2dcw(currentOrd)
-
-    getGT(word)
-      .then(response => response.data) 
+    getGT(currentOrd.ord)
+      .then(response => response.data)
       // .then(log => console.log(log))
       .then(data => parseData(data))
       .then(t => setTranslation(t))
@@ -98,43 +78,49 @@ export default function Home() {
   }, [currentOrd])
 
   const handleNewOrd = (): void => {
-    const wa = calcWordArray(ARRAY, dateToggles)
+    const wa = calcWordArray(Array, dateToggles)
     setWordArray(wa)
-    // let word_array = calcWordArray(DCWs, dateToggles)
 
-    if (!wordArray.length) setRandomElement(setCurrentOrd, [['230112', 'default']])
-    else setRandomElement(setCurrentOrd, wordArray)
-    // setCurrentOrd(DCWs[rerenders.current])
+    let newOrd: DWO = currentOrd
+
+    if (!wa.length) {
+      setCurrentOrd(DEFAULT_DWO)
+      return
+    }
+
+
+    do {
+      console.log(' _in while loop_', newOrd.ord)
+      newOrd = randomElement(wa)
+    } while (wa.length > 1 && newOrd.ord == currentOrd.ord)
+    // newOrd = randomElement(wa)
+    setCurrentOrd(newOrd)
   }
 
   const handleAdd = (): void => {
-    const _currentOrd = currentOrd
-    const backup = DCWs
-    const index: number = backup.indexOf(_currentOrd)
+    const newArray: DWO[] = Array
+    const index = Array.indexOf(currentOrd)
 
-    let [date, count, word]: dcw = str2dcw(_currentOrd)
+    if (currentOrd.where < 4) {
+      currentOrd.where += 1
+      newArray[index] = currentOrd
+    }
 
-    if (count => 4) return
-    count += 1
-
-    const newDcw: dcw = [date, count, word]
-    backup[index] = dcw2str(newDcw)
-    setDCWs(backup)
+    setArray(newArray)
+    handleNewOrd()
   }
 
   const handleSub = (): void => {
-    const _currentOrd = currentOrd
-    const backup = DCWs
-    const index: number = DCWs.indexOf(_currentOrd)
+    const newArray: DWO[] = Array
+    const index = Array.indexOf(currentOrd)
 
-    let [date, count, word]: dcw = str2dcw(_currentOrd)
+    if (currentOrd.where > 0) {
+      currentOrd.where -= 1
+      newArray[index] = currentOrd
+    }
 
-    if (count <= 0) return
-    count -= 1
-
-    const newDcw: dcw = [date, count, word]
-    backup[index] = dcw2str(newDcw)
-    setDCWs(backup)
+    setArray(newArray)
+    handleNewOrd()
   }
 
   const handleDateToggle = (id: string): void => {
@@ -144,61 +130,69 @@ export default function Home() {
 
   return (
     <div className={`bg-black text-slate-300 flex flex-col`}>
-      <div>{rerenders.current}</div>
-      <Dates dateToggles={dateToggles}
-             handleDateToggle={handleDateToggle}
-             manualRender={manualRender}
-             setManualRender={setManualRender} />
-      <div className="flex flex-col justify-center content-center min-w-full h-full text-center">
+      <div className={`absolute`}>
+        <div className={``}>{rerenders.current}</div>
+        <div className={``}>{wordArray.length}</div>
+        {/* <div className={``}>{Array.length}</div> */}
+        <Dates dateToggles={dateToggles}
+               handleDateToggle={handleDateToggle}
+               manualRender={manualRender}
+               setManualRender={setManualRender} />
+      </div>
+      <div className={`border-0 flex flex-col justify-center content-center text-center pt-[130px]`}>
         <Card currentOrd={currentOrd}
               handleNewOrd={handleNewOrd} />
+        <div className={`flex flex-row justify-center text-8xl pt-[100px]`}>
+          <button className={`p-[20px] border-0`} onClick={() => handleAdd()}>+</button>
+          <button className={`p-[20px] border-0`} onClick={() => handleSub()}>-</button>
+        </div>
         <Translation translation={translation}
-                     manualRender={manualRender}
-                     setManualRender={setManualRender} />
+          manualRender={manualRender}
+          setManualRender={setManualRender} />
       </div>
     </div>
-)}
+  )
+}
 
 
 function Card({ currentOrd, handleNewOrd }) {
-  if (currentOrd === undefined) return <div></div>
-  const [_, __, word]: dcw = str2dcw(currentOrd)
+  if (currentOrd === undefined) return <div>currentOrd undefined</div>
 
-  return <div
-      className={`flex flex-col p-[200px] text-8xl`}
-      onClick={() => handleNewOrd()}
-    >{word}
+  const getColor = <T,>(array: T[]): T => array[currentOrd.where]
+
+  // const col: string[] = [`text-green-300`, `text-green-200`, `text-white`, `text-red-200`, `text-red-300`]
+  const colors: string[] = [`text-green-200`, `text-white`, `text-red-100`, `text-red-200`, `text-red-300`]
+
+  const color = getColor(colors)
+
+  return <div className={`flex flex-row justify-center content-end h-[100px] border-0`}>
+    <div className={`${color} text-4xl p-[20px] pt-[35px]`}>⬤</div>
+    <div className={`text-white text-8xl min-w-[100px] border-0`}
+         onClick={() => handleNewOrd()}
+      >{currentOrd.ord}
+    </div>
   </div>
 }
 
 
-function Translation({ translation, manualRender, setManualRender }) {
-  if (translation === undefined || !translation.hasOwnProperty('source')) {
-    translation = { source: 'egg' }
-  }
-  
-  let a: JSX.Element
-  // let a: any
+function Translation({ translation }) {
+  let a: JSX.Element[] | undefined
 
   if (translation.hasOwnProperty('lexcats')) {
-    // setManualRender(manualRender + 1)
-    // a = <div>working but not</div> 
+    let color: string
+
     a = Object.keys(translation.lexcats).map(lc => {
       // console.log('lc > ', translation.lexcats[lc])
       return <div className={`flex flex-row`}>
         {/* <div className={`w-1/6 border-0`}></div> */}
         <div className={`flex flex-row justify-center w-5/6 px-[20px] border-0`}>
-          <div className={`w-1/5 text-left border-0`}>{lc}</div>
-          <div className={`flex flex-col justify-center w-3/4 border-0`}>
+          <div className={`w-1/2 text-right text-xs border-0`}>{lc}</div>
+          <div className={`flex flex-col justify-center w-1/2 border-0`}>
             {translation.lexcats[lc].map((en_word: LCEntry) => {
-              let color = en_word.score ? 'text-slate-200 ': 'text-slate-400'
-              return <div className={`w-7/8 flex flex-row justify-left border-0 py-[3px] ${color}`}>
+              color = en_word.score ? 'text-slate-200 ' : 'text-slate-400'
+              return <div className={`w-7/8 flex flex-col justify-left border-0 py-[3px] ${color}`}>
                 <div className={`w-2/5 px-[5px] text-left border-0`}>{en_word.word}</div>
-                {/* <div className={`w-[100px] p-[5px] text-left`}>{en_word.score}</div> */}
-                {en_word.reverse_translation.map((rt_word: string) => {
-                  color = en_word.score ? 'text-slate-300 ': 'text-slate-500'
-                  return <div className={`px-[5px] flex-nowrap text-left border-0 overflow-visible ${color}`}>{rt_word}</div>
-                })}
+                <ReverseTranslation en_word={en_word} color={color} />
               </div>
             })}
           </div>
@@ -207,10 +201,7 @@ function Translation({ translation, manualRender, setManualRender }) {
     })
   }
 
-  if (a === undefined) {
-    a = <div>a is undefined</div>
-  }
-
+  if (a === undefined) { a = [<div>a is undefined</div>] }
 
   return <div className={`flex flex-col border-0`}>
     <div className={`text-4xl py-[20px]`}>{translation.translation}</div>
@@ -218,21 +209,32 @@ function Translation({ translation, manualRender, setManualRender }) {
   </div>
 }
 
+function ReverseTranslation({ en_word, color }: { en_word: LCEntry, color: string }) {
+  if (!en_word.hasOwnProperty('reverse_translation')) return <div>no reverse_translation</div>
+
+  return <div className={`flex flex-row`}>
+    {en_word.reverse_translation.map((rt_word: string) => {
+      color = en_word.score ? 'text-slate-300 ' : 'text-slate-500'
+      return <div className={`px-[5px] align-center flex-nowrap text-left text-xs border-0 overflow-visible ${color}`}>{rt_word}</div>
+    })}
+  </div>
+}
+
 
 function Dates({ dateToggles, handleDateToggle, manualRender, setManualRender }) {
-  return <div className={`absolute flex flex-col top-9`}>
+  return <div className={`flex flex-col`}>
     {Object.keys(dateToggles).map((day: string) => {
       const dayColor: string = dateToggles[day] ? 'text-slate-500' : 'text-black'
 
       return <button
-          key={`${day}`}
-          id={`${day}`}
-          className={`relative ${dayColor} hover:text-slate-300 py-[0px]`}
-          onClick={() => {
-            handleDateToggle(day)
-            setManualRender(manualRender + 1)
-          }}
-        >{day}</button>
+        key={`${day}`}
+        id={`${day}`}
+        className={`relative ${dayColor} hover:text-slate-300`}
+        onClick={() => {
+          handleDateToggle(day)
+          setManualRender(manualRender + 1)
+        }}
+      >{day}</button>
     })}
   </div>
 }
