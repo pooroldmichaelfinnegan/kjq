@@ -13,7 +13,7 @@ interface DWO {
   ord: string
 }
 
-const ARRAY: DWO[] = wordList.slice(-20)
+const ARRAY: DWO[] = wordList
 const BACKUP = ARRAY
 const DEFAULT_DWO: DWO = { date: "221228", where: 1, ord: "ved" } as DWO
 
@@ -90,7 +90,7 @@ export default function Home() {
 
 
     do {
-      console.log(' _in while loop_', newOrd.ord)
+      // console.log(' _in while loop_', newOrd.ord)
       newOrd = randomElement(wa)
     } while (wa.length > 1 && newOrd.ord == currentOrd.ord)
     // newOrd = randomElement(wa)
@@ -142,9 +142,9 @@ export default function Home() {
       <div className={`border-0 flex flex-col justify-center content-center text-center pt-[130px]`}>
         <Card currentOrd={currentOrd}
               handleNewOrd={handleNewOrd} />
-        <div className={`flex flex-row justify-center text-8xl pt-[100px]`}>
-          <button className={`p-[20px] border-0`} onClick={() => handleAdd()}>+</button>
-          <button className={`p-[20px] border-0`} onClick={() => handleSub()}>-</button>
+        <div className={`flex flex-row justify-center text-8xl`}>
+          <button className={`px-[30px] border-0`} onClick={() => handleAdd()}>+</button>
+          <button className={`px-[30px] border-0`} onClick={() => handleSub()}>-</button>
         </div>
         <Translation translation={translation}
           manualRender={manualRender}
@@ -165,18 +165,21 @@ function Card({ currentOrd, handleNewOrd }) {
 
   const color = getColor(colors)
 
-  return <div className={`flex flex-row justify-center content-end h-[100px] border-0`}>
+  return <div className={`flex flex-row justify-center items-stretch h-[220px] border-0`}>
     <div className={`${color} text-4xl p-[20px] pt-[35px]`}>⬤</div>
     <div className={`text-white text-8xl min-w-[100px] border-0`}
          onClick={() => handleNewOrd()}
       >{currentOrd.ord}
     </div>
+    <div className={`${color} text-4xl p-[20px] pt-[35px]`}>⬤</div>
   </div>
 }
 
 
 function Translation({ translation }) {
   let a: JSX.Element[] | undefined
+
+  if (translation === undefined) return <div>translation undefined</div>
 
   if (translation.hasOwnProperty('lexcats')) {
     let color: string
