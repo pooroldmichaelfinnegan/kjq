@@ -195,9 +195,9 @@ function Translation({ translation }) {
             {translation.lexcats[lc].map((en_word: LCEntry) => {
               color = en_word.score ? 'text-slate-200 ' : 'text-slate-400'
               return <div className={`w-7/8 flex flex-col justify-left border-0 py-[3px] ${color}`}>
-                <div className={`w-2/5 px-[5px] text-left border-0`}>
-                  <div className={``} >{Math.round(en_word.score * 10)}</div>
-                  <div className={``} >{en_word.word}</div>
+                <div className={`relative flex flex-row w-2/5 px-[5px] text-left border-0`}>
+                  <div className={`absolute text-xs -left-2 -bottom-1 pr-[5px]`} >{Math.round(en_word.score * 10) + 1 || ''}</div>
+                  <div className={`text-xl`} >{en_word.word}</div>
                 </div>
                 <ReverseTranslation en_word={en_word} color={color} />
               </div>
