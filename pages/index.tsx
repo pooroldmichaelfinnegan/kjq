@@ -227,7 +227,6 @@ function ReverseTranslation({ en_word, color }: { en_word: LCEntry, color: strin
   </div>
 }
 
-
 function Dates({ dateToggles, handleDateToggle, manualRender, setManualRender }) {
   return <div className={`flex flex-col`}>
     {Object.keys(dateToggles).map((day: string) => {
