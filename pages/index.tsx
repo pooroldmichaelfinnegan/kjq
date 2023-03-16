@@ -12,16 +12,15 @@ interface DWO {
   where: number
   ord: string
 }
-type rDWO = Required<DWO>
 
-const ARRAY: rDWO[] = wordList
+const ARRAY: DWO[] = wordList
 const BACKUP = ARRAY
-const DEFAULT_DWO: rDWO = { date: "221228", where: 1, ord: "ved" } as rDWO
+const DEFAULT_DWO: DWO = { date: "221228", where: 1, ord: "ved" } as DWO
 
 
-const getDates = (array: rDWO[]): Record<string, Boolean> => {
+const getDates = (array: DWO[]): Record<string, Boolean> => {
   const datesToggle: Record<string, Boolean> = {}
-  let dwo: rDWO
+  let dwo: DWO
 
   for (dwo of array) {
     datesToggle[dwo.date] = false
@@ -30,9 +29,9 @@ const getDates = (array: rDWO[]): Record<string, Boolean> => {
 }
 
 
-const calcWordArray = (array: rDWO[], date_toggles: Record<string, Boolean>): rDWO[] => {
-  let dwo_pool: rDWO[] = []
-  let dwo: rDWO
+const calcWordArray = (array: DWO[], date_toggles: Record<string, Boolean>): DWO[] => {
+  let dwo_pool: DWO[] = []
+  let dwo: DWO
 
   for (dwo of array) {
     if (date_toggles[dwo.date] == false) continue
@@ -48,8 +47,8 @@ const calcWordArray = (array: rDWO[], date_toggles: Record<string, Boolean>): rD
 
 
 export default function Home() {
-  const [Array, setArray] = useState<rDWO[]>(ARRAY)
-  const [currentOrd, setCurrentOrd] = useState<rDWO>(DEFAULT_DWO)
+  const [Array, setArray] = useState<DWO[]>(ARRAY)
+  const [currentOrd, setCurrentOrd] = useState<DWO>(DEFAULT_DWO)
   const [dateToggles, setDateToggles] = useState<Record<string, Boolean>>(getDates(Array))
   const [wordArray, setWordArray] = useState(calcWordArray(Array, dateToggles))
   const [translation, setTranslation] = useState()
@@ -82,7 +81,7 @@ export default function Home() {
     const wa = calcWordArray(Array, dateToggles)
     setWordArray(wa)
 
-    let newOrd: rDWO = currentOrd
+    let newOrd: DWO = currentOrd
 
     if (!wa.length) {
       setCurrentOrd(DEFAULT_DWO)
@@ -99,7 +98,7 @@ export default function Home() {
   }
 
   const handleAdd = (): void => {
-    const newArray: rDWO[] = Array
+    const newArray: DWO[] = Array
     const index = Array.indexOf(currentOrd)
 
     if (currentOrd.where < 4) {
@@ -112,7 +111,7 @@ export default function Home() {
   }
 
   const handleSub = (): void => {
-    const newArray: rDWO[] = Array
+    const newArray: DWO[] = Array
     const index = Array.indexOf(currentOrd)
 
     if (currentOrd.where > 0) {
