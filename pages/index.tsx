@@ -5,7 +5,13 @@ import { randomElement } from "../tools"
 
 // import wordList from "../../google_drive_pomf/str_ords.json"
 import wordList from "../../google_drive_pomf/date_where_ord.json"
+import { TodoComment } from "typescript"
 
+
+const files: Record<symbol, Boolean> = {
+  wordList: 0,
+  TEST_DWO: 0,
+}
 
 interface DWO {
   date: string
@@ -14,9 +20,10 @@ interface DWO {
 }
 
 const ARRAY: DWO[] = wordList
-const BACKUP = ARRAY
 const DEFAULT_DWO: DWO = { date: "221228", where: 1, ord: "ved" } as DWO
+const TEST_DWO: DWO[] = [{ date: "TEST", where: 3, ord: "•" }] as DWO[]
 
+const handleFileBools = (file) => 
 
 const getDates = (array: DWO[]): Record<string, Boolean> => {
   const datesToggle: Record<string, Boolean> = {}
@@ -226,7 +233,7 @@ function ReverseTranslation({ en_word, color }: { en_word: LCEntry, color: strin
   </div>
 }
 
-function Dates({ dateToggles, handleDateToggle, manualRender, setManualRender }) {
+function Dates({ dateToggles, handleDateToggle, manualRender, setManualRender }: {dateToggles: Record<string, Boolean>}) {
   return <div className={`flex flex-col`}>
     {Object.keys(dateToggles).map((day: string) => {
       const dayColor: string = dateToggles[day] ? 'text-slate-500' : 'text-black'
@@ -241,5 +248,24 @@ function Dates({ dateToggles, handleDateToggle, manualRender, setManualRender })
         }}
       >{day}</button>
     })}
+  </div>
+}
+
+function FileBools({fileBools}: {[P in string]: Boolean}) {
+  return <div className={``}>
+    { Object.keys(fileBools).map((file: string) => {
+      const dayColor: string = fileBools ? 'text-slate-500' : 'text-black'
+
+      return <button
+        key={`${file}`}
+        id={`${file}`}
+        className={`relative ${dayColor} hover:text-slate-300`}
+        onClick={() => {
+          handleFileBools(file)
+          // setManualRender(manualRender + 1)
+        }}
+        >{file}</button>
+      })
+    }
   </div>
 }
