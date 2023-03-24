@@ -5,7 +5,6 @@ import { randomElement } from "../tools"
 
 // import wordList from "../../google_drive_pomf/str_ords.json"
 import wordList from "../../google_drive_pomf/date_where_ord.json"
-import { TodoComment } from "typescript"
 
 
 const files: Record<symbol, Boolean> = {
